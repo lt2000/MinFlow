@@ -1,0 +1,6 @@
+workflow: tpcds-16
+functions:
+- {image: tpcds-16_part, name: part, qos_requirement: 0.95, qos_time: 100}
+- {image: tpcds-16_join, name: join, qos_requirement: 0.95, qos_time: 100}
+- {image: tpcds-16_merge, name: merge, qos_requirement: 0.95, qos_time: 100}
+max_containers: 200

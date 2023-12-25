@@ -1,0 +1,6 @@
+workflow: mapreduce-sort
+functions:
+- {image: sort_start, name: start, qos_requirement: 0.95, qos_time: 100}
+- {image: sort_part, name: part, qos_requirement: 0.95, qos_time: 100}
+- {image: sort_sort, name: sort, qos_requirement: 0.95, qos_time: 100}
+max_containers: 200

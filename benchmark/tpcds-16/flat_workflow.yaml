@@ -1,0 +1,102 @@
+functions:
+- mem_usage: 0.25
+  name: virtual
+  next:
+    nodes:
+    - part
+    split_ratio: 600
+    type: shuffle
+  output:
+    file:
+      size: 3383449
+      type: pass
+    filename:
+      size: 8
+      type: keys
+  runtime: 0.02
+  scale: 3
+  source: virtual
+- input:
+    file:
+      size: 3383449
+      type: pass
+      value:
+        function: start
+        parameter: file
+    filename:
+      size: 8
+      type: key
+      value:
+        function: start
+        parameter: filename
+  mem_usage: 0.25
+  name: part
+  next:
+    nodes:
+    - join
+    split_ratio: 600
+    type: shuffle
+  output:
+    wordcount:
+      size: 736992
+      type: pass
+  runtime: 0.12
+  scale: 3
+  source: tpcds-16_part
+  split_ratio: 600
+- input:
+    filename:
+      size: 8
+      type: key
+      value:
+        function: start
+        parameter: filename
+    wordcount:
+      size: 80
+      type: pass
+      value:
+        function: count
+        parameter: wordcount
+  mem_usage: 0.25
+  name: join
+  next:
+    nodes:
+    - merge
+    type: pass
+  output:
+    result:
+      size: 325053
+      type: pass
+  runtime: 0.05
+  scale: 3
+  source: tpcds-16_join
+  split_ratio: 600
+- input:
+    filename:
+      size: 8
+      type: key
+      value:
+        function: start
+        parameter: filename
+    wordcount:
+      size: 80
+      type: pass
+      value:
+        function: count
+        parameter: wordcount
+  mem_usage: 0.25
+  name: merge
+  output:
+    result:
+      size: 325053
+      type: pass
+  runtime: 0.05
+  scale: 3
+  source: tpcds-16_merge
+  split_ratio: 600
+global_output:
+  result:
+    type: pass
+    value:
+      function: tpcds
+      parameter: result

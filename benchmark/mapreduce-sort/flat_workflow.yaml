@@ -1,0 +1,75 @@
+functions:
+- mem_usage: 0.25
+  name: virtual
+  next:
+    nodes:
+    - part
+    split_ratio: 100
+    type: shuffle
+  output:
+    file:
+      size: 3383449
+      type: pass
+    filename:
+      size: 8
+      type: keys
+  runtime: 0.02
+  scale: 3
+  source: virtual
+- input:
+    file:
+      size: 3383449
+      type: pass
+      value:
+        function: start
+        parameter: file
+    filename:
+      size: 8
+      type: key
+      value:
+        function: start
+        parameter: filename
+  mem_usage: 0.25
+  name: part
+  next:
+    nodes:
+    - sort
+    split_ratio: 100
+    type: shuffle
+  output:
+    mapreducesort:
+      size: 736992
+      type: pass
+  runtime: 0.12
+  scale: 3
+  source: sort_part
+  split_ratio: 100
+- input:
+    filename:
+      size: 8
+      type: key
+      value:
+        function: start
+        parameter: filename
+    mapreducesort:
+      size: 80
+      type: pass
+      value:
+        function: part
+        parameter: mapreducesort
+  mem_usage: 0.25
+  name: sort
+  output:
+    result:
+      size: 325053
+      type: pass
+  runtime: 0.05
+  scale: 3
+  source: sort_sort
+  split_ratio: 100
+global_output:
+  result:
+    type: pass
+    value:
+      function: sort
+      parameter: result
