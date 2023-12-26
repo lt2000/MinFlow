@@ -244,7 +244,7 @@ We will demonstrate how to execute MinFlow with a "Hello world"-sized example, i
 
      It should be noted that the first run is the cold start of the container, and only the results after the second run are counted
 
-## Run Experiment
+## Detailed Instructions for Running Experiments
 
 We will use 200G Terasort under 600 function parallelism running on Minflow as an example to show how to reproduce our main experiments
 
