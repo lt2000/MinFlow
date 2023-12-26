@@ -4,7 +4,7 @@ functions:
   next:
     nodes:
     - part
-    split_ratio: 100
+    split_ratio: 8
     type: shuffle
   output:
     file:
@@ -34,7 +34,7 @@ functions:
   next:
     nodes:
     - sort
-    split_ratio: 100
+    split_ratio: 8
     type: shuffle
   output:
     mapreducesort:
@@ -43,7 +43,7 @@ functions:
   runtime: 0.12
   scale: 3
   source: sort_part
-  split_ratio: 100
+  split_ratio: 8
 - input:
     filename:
       size: 8
@@ -66,7 +66,7 @@ functions:
   runtime: 0.05
   scale: 3
   source: sort_sort
-  split_ratio: 100
+  split_ratio: 8
 global_output:
   result:
     type: pass

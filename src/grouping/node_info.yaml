@@ -1,24 +1,24 @@
 nodes:
 # master
-- worker_address: 172.31.34.109:8001 # node1
+- worker_address: 172.31.42.166:8001 # node1
   scale_limit: 120
 # worker
-- worker_address: 172.31.46.163:8001 # node2
+- worker_address: 172.31.35.99:8001 # node2
   scale_limit: 120
-- worker_address: 172.31.33.210:8001 # node3
-  scale_limit: 120
-- worker_address: 172.31.44.9:8001 # node4
-  scale_limit: 120
-- worker_address: 172.31.34.237:8001 # node5
-  scale_limit: 120
-- worker_address: 172.31.47.234:8001 # node6
-  scale_limit: 120
-- worker_address: 172.31.41.149:8001 # node7
-  scale_limit: 120
-- worker_address: 172.31.45.246:8001 # node8
-  scale_limit: 120
-- worker_address: 172.31.33.191:8001 # node9
-  scale_limit: 120
-- worker_address: 172.31.36.98:8001 # node10
-  scale_limit: 120
+# - worker_address: 172.31.33.210:8001 # node3
+#   scale_limit: 120
+# - worker_address: 172.31.44.9:8001 # node4
+#   scale_limit: 120
+# - worker_address: 172.31.34.237:8001 # node5
+#   scale_limit: 120
+# - worker_address: 172.31.47.234:8001 # node6
+#   scale_limit: 120
+# - worker_address: 172.31.41.149:8001 # node7
+#   scale_limit: 120
+# - worker_address: 172.31.45.246:8001 # node8
+#   scale_limit: 120
+# - worker_address: 172.31.33.191:8001 # node9
+#   scale_limit: 120
+# - worker_address: 172.31.36.98:8001 # node10
+#   scale_limit: 120
 

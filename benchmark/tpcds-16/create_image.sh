@@ -1,8 +1,5 @@
 docker rm -f $(docker ps -aq --filter label=workflow)
 
-docker image rm workflow_async_base
-docker build --no-cache -t workflow_async_base ~/minflow/src/container
-
 docker image rm tpcds-16_part
 docker build --no-cache -t tpcds-16_part ~/minflow/benchmark/tpcds-16/part
 

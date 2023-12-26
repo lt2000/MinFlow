@@ -89,8 +89,8 @@ def read_table(table_name, data):
 if __name__ == '__main__':
     num_processes = 20
     
-    file_num_list = [sys.argv[1]]
-    data_size_list = [sys.argv[2]] #328GB=100G 643GB=200G
+    file_num_list = [int(sys.argv[1])]
+    data_size_list = [int(sys.argv[2])] #328GB=100G 643GB=200G
     
     workflow_name = 'tpcds-16'
     func_name = 'partca'

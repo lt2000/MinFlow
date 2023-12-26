@@ -40,9 +40,9 @@ def main(func_idx, func_num, total_size):
     print(end - start)
     
 if __name__ == '__main__':
-    func_nums = [sys.argv[1]]
+    func_nums = [int(sys.argv[1])]
     bucket_list = [container_config.S3_INPUT_BUCKET]
-    record_num = sys.argv[2]*10*1000
+    record_num = int(sys.argv[2])*10*1000
     total_size = [record_num] 
     
     for k,v in enumerate(bucket_list):

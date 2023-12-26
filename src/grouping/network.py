@@ -171,7 +171,7 @@ class min_generator:
                         min_v = sum(v)
                 opt_net = factorization[min_idx]
                     
-        print(opt_net)
+        # print(opt_net)
         self.group_ratio = []
         low = 0
         high = len(opt_net) - 1

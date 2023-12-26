@@ -1,6 +1,0 @@
-method,runtime,cost
-S3,1,1
-Locus,0,0
-FaaSFlow,0.725336600832483,0.95
-Lambada,0.808151617502713,0.14
-MinFlow,0.436799890262194,0.04

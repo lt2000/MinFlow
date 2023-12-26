@@ -12,5 +12,6 @@ if __name__ == '__main__':
         
     split_ratio = int(sys.argv[1])
     workflow_name = sys.argv[2]
-    for ip in ip_list:
+    for k,ip in enumerate(ip_list):
         os.system(f'python grouping_min.py {split_ratio} {ip} {workflow_name} ')
+        print(f'node{k+1} success!')

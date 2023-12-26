@@ -7,3 +7,4 @@ psutil
 pandas
 PyYAML
 boto3
+seaborn

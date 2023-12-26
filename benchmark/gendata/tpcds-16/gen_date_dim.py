@@ -34,7 +34,7 @@ if __name__ == '__main__':
     
     file_path = './dataset/{}.dat'.format(table_upload)
     print(file_path)
-    for i in range(0,file_num,):
+    for i in range(0,file_num,1):
         
         bucket_path = f'{workflow_name}/{file_num}/global-input-{func_name}-{i}.csv'
         remote_db.upload_file(file_path, input_bucket, bucket_path)

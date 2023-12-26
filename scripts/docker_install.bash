@@ -14,8 +14,8 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 # install and initialize couchdb
 sudo docker pull couchdb
 sudo docker run -itd -p 5984:5984 -e COUCHDB_USER=little -e COUCHDB_PASSWORD=little --name couchdb couchdb
-# pip install -r requirements.txt
-python3 couchdb_starter.py
+python3 ~/minflow/scripts/couchdb_starter.py
+
 # # install redis
 sudo docker pull redis
 sudo docker network create --driver bridge --subnet 172.16.0.1/16 --gateway 172.16.0.1 docker1

@@ -7,16 +7,20 @@ import os
 import numpy as np
 
 
-node_dict ={'172.31.34.109': '1',
-            '172.31.46.163': '2',
-            '172.31.33.210': '3',
-            '172.31.44.9'  : '4',
-            '172.31.34.237': '5',
-            '172.31.47.234': '6',
-            '172.31.41.149': '7',
-            '172.31.45.246': '8',
-            '172.31.33.191':'9',
-            '172.31.36.98' :'10'
+# node_dict ={'172.31.34.109': '1',
+#             '172.31.46.163': '2',
+#             '172.31.33.210': '3',
+#             '172.31.44.9'  : '4',
+#             '172.31.34.237': '5',
+#             '172.31.47.234': '6',
+#             '172.31.41.149': '7',
+#             '172.31.45.246': '8',
+#             '172.31.33.191':'9',
+#             '172.31.36.98' :'10'
+# }
+
+node_dict ={'172.31.42.166': '1',
+            '172.31.35.99': '2'
 }
 
 def write_to_file(data,path):
@@ -35,12 +39,13 @@ def read_resource_usage(filename='resource_usage_node6.txt'):
 def get_resource_statistics(interval=1, node=0, req_id=''):
     result = subprocess.check_output(f"ip route | grep default | awk \'{{print $5}}\'", shell=True)
     interface = result.strip().decode()
-    print(interface)
+    # print(interface)
     last_time = time.time()
     last_bytes_sent = psutil.net_io_counters(pernic=True)[interface].bytes_sent
     last_bytes_received = psutil.net_io_counters(
         pernic=True)[interface].bytes_recv
     
+    # os.system('mkdir ~/dataset/')
     path = '/home/ubuntu/dataset/{}_node{}.txt'.format(req_id, node_dict[node])
     # if os.path.exists(path):
     #     os.remove(path)

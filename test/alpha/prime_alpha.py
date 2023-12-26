@@ -3,7 +3,9 @@ import copy
 import time
 import matplotlib.pyplot as plt
 import numpy as np
+import  multiprocessing
 import pickle
+from functools import partial
 sys.path.append('../../config')
 import config
 shuffle_mode = config.SHUFFLE_MODE
@@ -215,7 +217,6 @@ class min_generator:
 
         sorted_items = sorted(transmit_time_dict.items(), key=lambda x: x[1])
         sorted_dict = dict(sorted_items)
-        # print(sorted_dict)
         opt_level = list(sorted_dict.keys())[0]
         opt_net = factorization_copy[opt_level]
         return opt_net
@@ -232,17 +233,7 @@ class min_generator:
         factors = self.getFactor(self.m)
         factors.append(self.m)
         factorization = self.dynamic_programming(maxLevel, factors)
-        
-        if self.modeler:
-            opt_net = self.config_modeler(factorization)
-        else: 
-            min_v = INFINITY
-            for k, v in factorization.items():
-                if min_v > sum(v):
-                    min_idx = k
-                    min_v = sum(v)
-            opt_net = factorization[min_idx]
-        
+        opt_net = factorization[list(factorization.keys())[-1]]
                     
         # print(opt_net)
         self.group_ratio = []
@@ -301,47 +292,53 @@ def is_prime(number):
     return True
 
 if __name__ == "__main__":
+    #n = int(sys.argv[1])
     plt.style.use('_mpl-gallery')
 
     # make data
+    x = np.arange(1, 1001, 1)
     ay = []
     by = []
-    for n in range(1,1001,1):
-        max_level = -1
-        if n == 0:
-            continue
-        base = 0
-        schedule = 0
+    
+    for a in range(1,5):
+        print(f'alpha={a}')
+        pdf = {}
+        alpha_3 = {}
+        if a>1:
+            pdf[1]=0
+        for n in range(1,1001,1):
+            max_level = -1
+            if n == 0:
+                continue
+            base = 0
+            schedule = 0
+            t1 = time.time()
+            new_n = n
+            if is_prime(n):
+                for k in range(max(1,n-a), n+a+1):
+                    temp_net = min_generator(k)
+                    if len(temp_net.group_ratio) > max_level:
+                        max_level =  len(temp_net.group_ratio)
+                        net = temp_net
+                        new_n = k
+                try:
+                    pdf[max_level] += 1
+                except:
+                    pdf[max_level] = 1    
+                alpha_3[n] = new_n
+                # print(n,new_n,net.group_ratio)
+            t2 = time.time()
+            base += t2-t1 
+         
+        # print(pdf)
+        # print(pdf)
+        # print(sum(pdf.values()))
+        with open('a{}.pickle'.format(a), 'wb') as file:
+            pickle.dump(pdf, file)
         
-        print(n)
-        t1 = time.time()
-        for k in range(max(1,n-3), n+4):
-            temp_net = min_generator(k)
-            if len(temp_net.group_ratio) > max_level:
-                max_level =  len(temp_net.group_ratio)
-                net = temp_net
-                new_n = k
-        t2 = time.time()
-        base += t2-t1
+
         
-        for level in range(len(net.group_ratio)+1):
-            for idx in range(net.m):
-                t1 = time.time()
-                input_keys, output_keys = net.baseline_hash(idx,level)
-                t2=time.time()
-                input_keys, output_keys = net.schedule_hash(idx,level,input_keys, output_keys)
-                t3=time.time()
-                base+=t2-t1
-                schedule+=t3-t2
-        
-        
-        ay.append(base)
-        by.append(schedule)
-    with open('ay.pickle', 'wb') as file:
-        pickle.dump(ay, file)
-    with open('by.pickle', 'wb') as file:
-        pickle.dump(by, file)    
-  
+    
 
  
 

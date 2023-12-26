@@ -2,29 +2,29 @@ import sys
 import copy
 sys.path.append('../../config')
 import config
+shuffle_mode = config.SHUFFLE_MODE
 INFINITY = 1000000
 
-
+node_num = config.NODE_NUM
 
 class min_generator:
 
-    def __init__(self, m, shuffle_mode):
+    def __init__(self, m):
         self.m = m
         self.group_ratio = []
         self.group_num = []
         self.foreach_size = []
         self.modeler = config.MODELER
-        self.min_optimized()
-        
         if shuffle_mode == 'min':
+            self.min_optimized()
             self.shuffle_n = len(self.group_ratio)
-        elif self.is_prime(m):
-            self.shuffle_n = 1
-            self.foreach_size = [m,m]
         else:
             self.shuffle_n = 1
-            foreach_size = self.foreach_size[0]
-            self.foreach_size = [foreach_size, foreach_size]
+            foreach_size = 10
+            self.foreach_size = [foreach_size]* (self.m // foreach_size)
+            if self.m % foreach_size != 0:
+                self.foreach_size.append(self.m % foreach_size)
+            
 
     def is_prime(self, n):  # Determine if n is prime
         if n == 1 or n == 2:
@@ -119,6 +119,7 @@ class min_generator:
             factors = factorization[level]
             transmit_time_sum = 0
             turn = 1
+            # print(inter_data_size,func_bw)
             while(len(factors)):
                 if turn: 
                     req_num = factors.pop(-1) * func_num
@@ -136,8 +137,9 @@ class min_generator:
                     turn = 1
 
             transmit_time_dict[level] = transmit_time_sum
-
         # print(transmit_time_dict)
+
+
         sorted_items = sorted(transmit_time_dict.items(), key=lambda x: x[1])
         sorted_dict = dict(sorted_items)
         opt_level = list(sorted_dict.keys())[0]

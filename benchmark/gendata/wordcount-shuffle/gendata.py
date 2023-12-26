@@ -23,8 +23,8 @@ def upload_data(command,data):
 if __name__ == "__main__":
 
     num_processes = 20
-    file_nums = [sys.argv[1]]
-    data_size = sys.argv[2] #G
+    file_nums = [int(sys.argv[1])]
+    data_size = int(sys.argv[2]) #G
     for file_num in file_nums:
         file_path = 'cleaned_data'  # 替换为实际文件路径
         megabytes_to_read = (data_size * 1000 // file_num) + 1  # 读取10MB的数据

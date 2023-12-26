@@ -8,22 +8,6 @@ import config
 
 max_pt = 0
 
-def copy():
-    hostlist = ['172.31.31.179']
-
-    for host in hostlist:
-        r1 = redis.StrictRedis(host=host,
-                               port=8002, db=0)
-
-        r2 = redis.StrictRedis(host='172.16.0.1',
-                               port=8002, db=4)
-        keys = r1.keys()
-        for key in keys:
-            key_str = key.decode()
-            data = r1.get(key_str)
-            r2.set(key_str, data)
-
-
 def cal(hostlist, stage, request_id):
     global max_pt
     breakdown = {'input_time': {'start': [], 'end': [], 'latency': []},
@@ -88,19 +72,18 @@ def cal(hostlist, stage, request_id):
     else:
         results['output_time'] = 0
     
-    print(f'stage{stage}', results['input_time'], results['compute_time'], results['output_time'])
+    # print(f'stage{stage}', results['input_time'], results['compute_time'], results['output_time'])
    
 
     return results
 
 
 if __name__ == '__main__':
-    # copy()
     workflow_name = sys.argv[1]
     with open(workflow_name + '_' + 'request.json', 'r') as file:
         data = json.load(file)
     hostlist = ['172.16.0.1']
-    split_ratio = sys.argv[2]
+    split_ratio = int(sys.argv[2])
     res = {}
     for method, request_id in data.items():
         for request, latency in request_id.items():

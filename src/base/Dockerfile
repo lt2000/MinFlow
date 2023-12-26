@@ -4,10 +4,12 @@
 FROM python:3.9-slim
 
 COPY pip.conf /etc/pip.conf
+COPY sources.list /etc/apt/sources.list
+RUN rm -r  /etc/apt/sources.list.d
 
 # fulfill the structure requirement of proxy
 RUN mkdir /proxy
-COPY sources.list /etc/apt/sources.list
+
 
 WORKDIR /proxy
 
