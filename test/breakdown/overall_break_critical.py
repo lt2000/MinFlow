@@ -71,9 +71,6 @@ def cal(hostlist, stage, request_id):
          max_pt = temp
     else:
         results['output_time'] = 0
-    
-    # print(f'stage{stage}', results['input_time'], results['compute_time'], results['output_time'])
-   
 
     return results
 
@@ -87,6 +84,8 @@ if __name__ == '__main__':
     res = {}
     for method, request_id in data.items():
         for request, latency in request_id.items():
+            
+            # Compute the number of stages in the benchmark to facilitate the overall breakdown calculation.
             overall_breakdown = {'In/Output Time': 0,'Shuffle I/O Time': 0, 'Compute Time': 0}
             
             k = list(latency.keys()).pop()
@@ -105,11 +104,9 @@ if __name__ == '__main__':
                     stages.add(stage_name)
                 else:
                     stages.add(name)
-                    
-            # stages = sorted(list(stages))[1:]
-            # stages.append('merge')
             stages = sorted(list(stages))
-            # print(stages)
+            
+            # Statistics for critical paths in each stage.
             stage_breakdown = {}
             for stage in stages:
                 stage_breakdown[stage] = cal(hostlist, stage, request)

@@ -6,8 +6,9 @@ import parse_yaml_min
 sys.path.append('../../config')
 import config
 
-
+# Copy the function breakdown data for all nodes to the master node
 def copy():
+    # Config node IP list
     hostlist = ['172.31.42.166' ,
                 '172.31.35.99' ,
                 ]

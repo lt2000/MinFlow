@@ -331,7 +331,10 @@ if __name__ == "__main__":
                 t2=time.time()
                 input_keys, output_keys = net.schedule_hash(idx,level,input_keys, output_keys)
                 t3=time.time()
+                
+                # Overhead of the topology optimizer
                 base+=t2-t1
+                # Overhead of the function scheduler
                 schedule+=t3-t2
         
         

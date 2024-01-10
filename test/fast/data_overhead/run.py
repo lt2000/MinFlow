@@ -28,6 +28,7 @@ def analyze_workflow(workflow_name,method,split_ratio,times):
     req = {}
     
     e2e_total = 0
+    # Execute the benchmark, and please disregard the initial run as it represents a cold start.
     while time.time() - start <= TEST_PER_WORKFLOW and total <= times:
         total += 1
         id = str(uuid.uuid4())
