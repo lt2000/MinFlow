@@ -315,6 +315,7 @@ if __name__ == "__main__":
             t1 = time.time()
             new_n = n
             if is_prime(n):
+                # Pick a substitute for the prime number
                 for k in range(max(1,n-a), n+a+1):
                     temp_net = min_generator(k)
                     if len(temp_net.group_ratio) > max_level:

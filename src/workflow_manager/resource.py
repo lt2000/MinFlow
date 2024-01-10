@@ -19,6 +19,7 @@ import numpy as np
 #             '172.31.36.98' :'10'
 # }
 
+# Follow the format 'node_ip':'node_id' to configure
 node_dict ={'172.31.42.166': '1',
             '172.31.35.99': '2'
 }
