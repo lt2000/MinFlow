@@ -163,9 +163,9 @@ Generate execution plans for different methods on the master node and keep all n
 4. MinFlow
 
    * Change the configuration by in `src/config/config.py`
-     * SHUFFLE_MODE = 'single' # single, min
+     * SHUFFLE_MODE = 'min' # single, min
      * DATA_MODE = 'optimized' # raw, optimized
-     * MODELER = Ture
+     * MODELER = True
      * LAMBADA_OPT = False
      * BALANCE_STATISTICS = False
    * Run `src/grouping/metadata.py`
