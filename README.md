@@ -66,9 +66,46 @@ There are 3 places for config setting, and we provide an introduction to the par
 Clone our code `https://github.com/lt2000/MinFlow.git` and Perform the following four steps in sequence on each node:
 
 0. Rename the directory 
-   * Rename the directory to `minflow` 
+    * Rename the directory to `minflow` 
 
-1. Python
+1. zsh
+
+   * We use `zsh` as our shell, you can install `zsh` by following these steps
+
+     * install
+
+       ```bash
+       sudo apt-get install zsh -y
+       sudo chsh -s /bin/zsh
+       sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+       ```
+
+     * plugin
+
+       ```bash
+       git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+       
+       git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+       ```
+
+     * modify `~/.zshrc`
+
+       ```bash
+       theme = ys
+       
+       plugins=(
+       git
+       zsh-autosuggestions
+       zsh-syntax-highlighting
+       z
+       )
+       ```
+
+     * ```bash
+       source ~/.zshrc
+       ```
+
+2. Python
 
    * The Python version is 3.9, and we recommend using Anaconda to manage Python packages. Run `scripts/conda_install.bash` to install Anaconda and create a python environment named `minflow`
 
@@ -80,7 +117,7 @@ Clone our code `https://github.com/lt2000/MinFlow.git` and Perform the following
        conda env config vars set PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple
        ```
 
-2. Docker and database
+3. Docker and database
 
    * We utilize Docker for container management while employing CouchDB and Redis as metadata and log databases, respectively.
 
@@ -98,7 +135,7 @@ Clone our code `https://github.com/lt2000/MinFlow.git` and Perform the following
      sudo newgrp docker
      ```
 
-3. Build docker images
+4. Build docker images
 
    * Run `scripts/minflow_base.bash` and  `scripts/workflow_async_base.bash`  to build base images `minflow_base` and `workflow_async_base`
 
@@ -114,7 +151,7 @@ Clone our code `https://github.com/lt2000/MinFlow.git` and Perform the following
 
    * Run `benchmark/mapreduce-sort/create_image.sh`, `benchmark/tpcds-16/create_image.sh`, `benchmark/wordcount-shuffle/create_image.sh` to build image for Terasort, TPC-DS-Q16, WordCount,  respectively.
 
-4. Mount `tmpfs` as local storage
+5. Mount `tmpfs` as local storage
 
    * ```bash
      sudo mkdir ~/ramdisk/
