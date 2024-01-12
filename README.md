@@ -2,6 +2,10 @@
 
 The version of the paper we submitted has been revised based on the suggestions from the shepherd. In particular, we have added experiments to validate the efficacy of MinFlow under prime function parallelism (refer to Fig 18 and Fig 19 in our paper). It is essential to highlight that our artifacts align with the version of the paper that was submitted.
 
+## Artifact Overview
+
+This README file is divided into three sections. The first part outlines the hardware and software dependencies of our system, along with instructions on configuring the experimental environment and our system. Part Two demonstrates how to run MinFlow with a 'Hello world'-sized example. The third part provides an example using a 200G Terasort under 600 function parallelism on MinFlow, illustrating how to reproduce our main experiments.
+
 ## Introduction
 
 MinFlow is a serverless workflow engine that achieves high-performance and cost-efficient data passing for I/O-intensive stateful serverless analytics.
@@ -96,7 +100,7 @@ Clone our code `https://github.com/lt2000/MinFlow.git` and Perform the following
 
 3. Build docker images
 
-   * Run `scripts/create_image.bash` to build base images (`minflow_base` and `workflow_async_base`)
+   * Run `scripts/minflow_base.bash` and  `scripts/workflow_async_base.bash`  to build base images `minflow_base` and `workflow_async_base`
 
      * If you make modifications to the files in the `src/container` folder, it is necessary to rebuild the `workflow_async_base` image
 
